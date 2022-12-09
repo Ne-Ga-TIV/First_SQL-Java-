@@ -25,6 +25,11 @@ public class Trip {
         this.dateEnd = dateEnd;
     }
 
+    @Override
+    public String toString(){
+        return super.toString();
+    }
+
     public String getAirport() { return this.airport; }
     public String getTownTo() {return this.townTo; }
     public String getTownFrom() { return this.townFrom; }
@@ -34,5 +39,7 @@ public class Trip {
     public Date getDateEnd() { return this.dateEnd; }
     public Time getTimeStart() { return this.timeStart; }
     public Time getTimeEnd() {return this.timeEnd; }
+
+
     
 }
