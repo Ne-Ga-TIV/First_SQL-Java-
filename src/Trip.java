@@ -5,17 +5,18 @@ import java.sql.Date;
 
 public class Trip {
     private int tripId,companyId;
-    private String airport, townFrom, townTo;
+    private String airport, townFrom, townTo, planeModel;
     private Time timeStart, timeEnd;
     private Date dateStart, dateEnd;
 
-    public Trip(int tripId, int companyId, String airport,
+    public Trip(int tripId, int companyId, String airport, String planeModel,
                 String townFrom, String townTo, Time timeStart, 
                 Time timeEnd, Date dateStart, Date dateEnd)
     {
         this.tripId = tripId;
         this.companyId = companyId;
         this.airport = airport;
+        this.planeModel = planeModel;
         this.townFrom = townFrom;
         this.townTo = townTo;
         this.timeStart = timeStart;

@@ -42,8 +42,8 @@ public class DBManager{
         ResultSet rs = statement.executeQuery("SELECT * FROM Trip");
         while(rs.next()){
           trips.add(new Trip(rs.getInt(1), rs.getInt(2), 
-          rs.getString(3), rs.getString(4), rs.getString(5), rs.getTime(6), 
-          rs.getTime(7), rs.getDate(8), rs.getDate(9)));
+          rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getTime(7), 
+          rs.getTime(8), rs.getDate(9), rs.getDate(10)));
         
         }
     }catch(SQLException slqe){
@@ -54,6 +54,7 @@ public class DBManager{
 
       return trips;
     }
+    
 
     public static void closeConnection()
     {
