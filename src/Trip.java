@@ -27,7 +27,11 @@ public class Trip {
 
     @Override
     public String toString(){
-        return super.toString();
+        return tripId + " "+ companyId + " " + 
+               airport + " " + planeModel + " " + 
+               townFrom + " " + townTo + " " + 
+               timeStart + " "+ timeEnd + " " + 
+               dateStart + " " + dateEnd + "\n";
     }
 
     public String getAirport() { return this.airport; }
