@@ -44,7 +44,7 @@ public class Main {
           System.out.println("Please select the trip number you want to check(for exit enter 0)" + "");
 
           int select = UI.readAnswer(0, Integer.MAX_VALUE);
-          
+
 
           if(select == 0) { return; }
           
@@ -55,7 +55,10 @@ public class Main {
           
           do{
             an = s.nextLine();
-          }while(an != "y" || an != "n");   
+            if(an != "y" && an != "n"){
+              System.out.println("Please enter y/n");
+            }
+          }while(an != "y" && an != "n");   
           if(an == "y")
               newPassenger(select, con);
           else{
