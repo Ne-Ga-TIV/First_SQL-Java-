@@ -22,6 +22,7 @@ public class Main {
        System.exit(1);
      }
   }
+    
     public static void registerForTrips(Connection con){
         try{
           Statement statement = con.createStatement();
@@ -42,7 +43,8 @@ public class Main {
           UI.printTrips(rsTrips);
           System.out.println("Please select the trip number you want to check(for exit enter 0)" + "");
 
-          int select = UI.readAnswer(0, count);
+          int select = UI.readAnswer(0, Integer.MAX_VALUE);
+          
 
           if(select == 0) { return; }
           
