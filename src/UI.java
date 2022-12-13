@@ -37,6 +37,25 @@ public class UI {
         
 
     }
+
+    public static boolean sqlValid(String in){
+        return in.matches("[A-Za-z]+");
+    }
+    
+    public static String readStr(){
+        Scanner s = new Scanner(System.in);
+        String inputStr = null;
+        do{
+            inputStr = s.nextLine();
+            if(!sqlValid(inputStr)){
+                System.out.println("Please enter only letters");
+                inputStr = null;
+            }
+        }while(inputStr == null);
+        s.close();
+        return inputStr;
+
+    }
     public static void printList(String navList[]){
         
         for (int i = 1; i <= navList.length; i++) {
