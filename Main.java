@@ -19,7 +19,7 @@ public class Main {
        System.exit(1);
      }
   }
-    public static void RegisterForTrips(Connection con){
+    public static void registerForTrips(Connection con){
         try{
           Statement statement = con.createStatement();
           ResultSet rs = statement.executeQuery("SELECT town_from, town_to," +
@@ -43,8 +43,6 @@ public class Main {
           sqle.printStackTrace();
           return null ;
         }
-        System.out.println("Successfully connected to Postgres Database");
- 
         return postGresConn ;
      }
 
@@ -64,7 +62,7 @@ public class Main {
             
             switch (select) {
                 case 1:
-                  
+                    registerForTrips(connection);
                     break;
                 case 2:
                     break;
