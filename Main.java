@@ -135,7 +135,7 @@ public class Main {
         statement.setString(2, Integer.valueOf(place).toString());
         ResultSet rs = statement.executeQuery();
         rs.next();
-        if(rs.getInt(0) != 0){
+        if(rs.getInt(1) != 0){
           return false;
         }
 
