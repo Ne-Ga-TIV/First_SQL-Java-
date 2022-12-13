@@ -151,7 +151,7 @@ public class Main {
                                                     "date_start, date_end, company_name, trip.trip_id FROM trip, company, passenger_in_trip" +
                                                     "WHERE trip.company_id =  company.company_id AND"+  
                                                     "passenger_in_trip.trip_id = trip.trip_id AND passenger_in_trip.passenger_id = ?");
-        statement.setInt(1, id);
+        statement.setString(1, Integer.valueOf(id).toString());
         ResultSet rsTrips = statement.executeQuery();
         return rsTrips;
 
