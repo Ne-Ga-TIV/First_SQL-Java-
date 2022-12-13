@@ -7,8 +7,10 @@ import src.Trip;
 
 
 public class Main {
-  public static final String [] mainMenu = {"Register for trip", "Check out my trips",
-                                "Change my place", "Exit"};
+  
+  
+  
+  
   public static void loadDriver()
   {
      try {
@@ -59,7 +61,8 @@ public class Main {
      }
 
     public static void main(String[] args) {
-
+        final String [] mainMenu = {"Register for trip", "Check out my trips",
+                                      "Change my place", "Exit"};
         loadDriver();
         Connection connection = getConnection();
         
