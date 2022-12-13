@@ -31,12 +31,12 @@ public class Main {
                                 "date_start, date_end, company_name FROM trip, company" +
                                 " WHERE trip.company_id =  company.company_id");
           
-        // //  long count = statement.executeQuery("SELECT COUNT(*) FROM trip").getInt(1);
+          int count = statement.executeQuery("SELECT COUNT(*) FROM trip").getInt(1);
           
-        //   if(count == 0){
-        //       System.out.println("Sorry, there are currently no available trips");
-        //       return;
-        //   }
+          if(count == 0){
+            System.out.println("Sorry, there are currently no available trips");
+            return;
+          }
 
           UI.printTrips(rsTrips);
 
