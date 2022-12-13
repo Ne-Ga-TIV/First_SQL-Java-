@@ -60,7 +60,8 @@ public class Main {
               
             }
           }while(an.equals("y") && an.equals("n"));   
-          if(an == "y")
+          
+          if(an.equals("y"))
               newPassenger(select, con);
           else{
             System.out.println("Please enter your id");
