@@ -142,9 +142,11 @@ public class Main {
         System.out.println(rs.getInt(0));
         return true;
       }catch(SQLException sqle){
+        System.out.println("Couldn't create statment");
+          sqle.printStackTrace();
+          return false;
 
       }
-      return true;
 
 
     }
