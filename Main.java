@@ -1,7 +1,7 @@
 import java.sql.*;
 import java.util.Scanner;
 import src.UI;
-
+import java.util.UUID;
 
 
 
@@ -22,7 +22,16 @@ public class Main {
        System.exit(1);
      }
   }
-    
+    public static int generateUniqueId() {      
+      UUID idOne = UUID.randomUUID();
+      String str=""+idOne;        
+      int uid=str.hashCode();
+      String filterStr=""+uid;
+      str=filterStr.replaceAll("-", "");
+      return Integer.parseInt(str);
+  }
+
+
     public static void registerForTrips(Connection con){
         try{
           Statement statement = con.createStatement();
@@ -94,13 +103,17 @@ public class Main {
 
     }
     public static void newPassenger(int trip, Connection con){
+      
       String name = null, surname = null;
       
       System.out.println("Please enter your name");
       name =  UI.readStr();
+      
       System.out.println("Please enter your surname");
       surname =  UI.readStr();
+      
       int place = 0;
+      
       do{
         System.out.println("Please enter the desired place");
         place = UI.readAnswer(1, 100);
@@ -109,6 +122,17 @@ public class Main {
           System.out.println("Sorry this place is already taken");
         }
       }while(place == 0);
+
+      try{
+        con.setAutoCommit(false);
+        PreparedStatement statement = con.prepareStatement("INSERT INTO passenger VALUES (?, ?, ?)");
+        statement.setInt(1, generateUniqueId());
+        statement.setString(2, name);
+        statement.setString(3, surname);
+        statement.executeUpdate();
+        con.commit();
+      }catch(SQLException sqle){
+      }
       
      
     }
