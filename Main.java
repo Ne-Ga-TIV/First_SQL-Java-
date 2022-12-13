@@ -347,16 +347,15 @@ public class Main {
                   System.out.println("Select the trip for which you want to change your place(for exit enter 0)");
 
                   int trip = UI.readAnswer(0, Integer.MAX_VALUE);
+                  if(trip == 0) { return; }
                   
                   if(!checkRegs(trip, id, connection)){
                     System.out.println("You don`t have registration for this trip");
                     break;
                   }
 
+                  changePlace(id, trip, connection);
 
-        
-        
-                  if(select == 0) { return; }
                   
                 }
                     break;
