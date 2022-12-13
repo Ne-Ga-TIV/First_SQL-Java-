@@ -30,7 +30,7 @@ public class Main {
           ResultSet rsTrips = statement.executeQuery("SELECT town_from, town_to," +
                                 "date_start, date_end, company_name FROM trip, company" +
                                 " WHERE trip.company_id =  company.company_id");
-          long count = statement.executeQuery("SECECT COUNT(*) FROM trip").getLong(1);
+          long count = statement.executeQuery("SELECT COUNT(*) FROM trip").getLong(1);
           
           if(count == 0){
               System.out.println("Sorry, there are currently no available trips");
