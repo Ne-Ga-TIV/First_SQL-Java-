@@ -31,9 +31,9 @@ public class Main {
                                 "date_start, date_end, company_name FROM trip, company" +
                                 " WHERE trip.company_id =  company.company_id");
           
-          int count = statement.executeQuery("SELECT COUNT(*) FROM trip").getInt(1);
+          ResultSet rscount = statement.executeQuery("SELECT COUNT(*) FROM trip");
           
-          if(count == 0){
+          if(rscount == null){
             System.out.println("Sorry, there are currently no available trips");
             return;
           }
