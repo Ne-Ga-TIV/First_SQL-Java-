@@ -8,18 +8,17 @@ import src.Trip;
 
 public class Main {
     
-    public static void loadDriver()
-    {
-       try {
-         Class.forName("org.postgresql.Driver");
-       }
-       catch (ClassNotFoundException cnfe) {
-         System.out.println("Couldn't find driver class!");
-         cnfe.printStackTrace();
-         System.exit(1);
-       }
-    }
-
+  public static void loadDriver()
+  {
+     try {
+       Class.forName("org.postgresql.Driver");
+     }
+     catch (ClassNotFoundException cnfe) {
+       System.out.println("Couldn't find driver class!");
+       cnfe.printStackTrace();
+       System.exit(1);
+     }
+  }
     public static void RegisterForTrips(Connection con){
         try{
           Statement statement = con.createStatement();
@@ -37,7 +36,7 @@ public class Main {
         Connection postGresConn = null;
         
         try {
-          postGresConn = DriverManager.getConnection("jdbc:postgresql://pgsql3.mif/biblio", "anva8129", "cacaite228") ;
+          postGresConn = DriverManager.getConnection("jdbc:postgresql://pgsql3.mif/studentu", "anva8129", "cacaite228") ;
         }
         catch (SQLException sqle) {
           System.out.println("Couldn't connect to database!");

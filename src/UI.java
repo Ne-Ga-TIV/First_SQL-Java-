@@ -16,11 +16,11 @@ public class UI {
         do{
             in = input.nextLine();
             answer = Integer.parseInt(in) ;
-            if(from >= answer ||answer  >= to){
+            if(from > answer ||answer  > to){
                 System.out.println("Please select one of the options " + "[" + from + " - " + to + "]");
             }
 
-        }while(from >= answer || answer >= to);
+        }while(from > answer || answer > to);
         return answer;
     }
 
