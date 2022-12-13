@@ -55,11 +55,11 @@ public class Main {
           
           do{
             an = s.nextLine();
-            if(an != "y" && an != "n"){
-              System.out.println("Please enter y/n" + an);
+            if(an.equals("y") && an.equals("n")){
+              System.out.println("Please enter y/n");
               
             }
-          }while(an != "y" && an != "n");   
+          }while(an.equals("y") && an.equals("n"));   
           if(an == "y")
               newPassenger(select, con);
           else{
@@ -67,6 +67,7 @@ public class Main {
             s.nextLine();
 
           }
+          s.close();
         }catch(SQLException sqle){
           System.out.println("Couldn't create statment");
           sqle.printStackTrace();
