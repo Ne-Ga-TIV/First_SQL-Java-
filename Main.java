@@ -152,8 +152,8 @@ public class Main {
                                                     "WHERE trip.company_id =  company.company_id AND"+  
                                                     "passenger_in_trip.trip_id = trip.trip_id AND passenger_in_trip.passenger_id = ?");
         statement.setInt(1, id);
-
         ResultSet rsTrips = statement.executeQuery();
+        if(rsTrips == null){ return null;}
         return rsTrips;
       }catch(SQLException sqle){}
       return null;
