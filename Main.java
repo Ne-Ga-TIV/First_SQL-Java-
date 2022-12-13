@@ -148,7 +148,7 @@ public class Main {
     public static ResultSet getPassengerTrips(int id, Connection con){
       try{
         PreparedStatement statement = con.prepareStatement("SELECT town_from, town_to," +
-                                                    "date_start, date_end, company_name, trip_id FROM trip, company, passenger_in_trip" +
+                                                    "date_start, date_end, company_name, trip.trip_id FROM trip, company, passenger_in_trip" +
                                                     "WHERE trip.company_id =  company.company_id AND"+  
                                                     "passenger_in_trip.trip_id = trip.trip_id AND passenger_in_trip.passenger_id = ?");
         statement.setInt(1, id);
