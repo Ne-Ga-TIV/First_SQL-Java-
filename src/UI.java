@@ -43,8 +43,10 @@ public class UI {
     }
     
     public static String readStr(){
+        
         Scanner s = new Scanner(System.in);
         String inputStr = null;
+        
         do{
             inputStr = s.nextLine();
             if(!sqlValid(inputStr)){
@@ -52,7 +54,6 @@ public class UI {
                 inputStr = null;
             }
         }while(inputStr == null);
-        s.close();
         return inputStr;
 
     }
