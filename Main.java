@@ -1,4 +1,5 @@
 import java.net.ConnectException;
+import java.net.CookieHandler;
 import java.sql.*;
 import java.util.Scanner;
 import src.UI;
@@ -224,6 +225,19 @@ public class Main {
       }
      
     }
+    public static void changePlace(int id, int trip, Connection con){
+      int place;
+      do{
+        System.out.println("Please enter the desired place");
+        place = UI.readAnswer(1, 100);
+        
+        if(checkPlace(trip, place, con)){
+          place = 0;
+          System.out.println("Sorry this place is already taken");
+        }
+      }while(place == 0);
+
+    }
     public static void cancelTrip(int id, Connection con){
       
       System.out.println("Please select the trip number you want to cancel(for exit enter 0)" + "");
@@ -313,7 +327,32 @@ public class Main {
 
                 }
                 case 3:{
+                  System.out.println("Please, enter your id");
+                  
+                  int id = UI.readAnswer(1, Integer.MAX_VALUE);
+                  
+                  if(checkId(connection, id)){
+                    System.out.println("No passenger with this ID\n");
+                    break;
+                  }  
+                  
+                  ResultSet rs = getPassengerTrips(id, connection);
+                  UI.printTrips(rs);
 
+                  System.out.println("Select the trip for which you want to change your place(for exit enter 0)");
+
+                  int trip = UI.readAnswer(0, Integer.MAX_VALUE);
+                  
+                  if(!checkRegs(trip, id, connection)){
+                    System.out.println("You don`t have registration for this trip");
+                    break;
+                  }
+
+
+        
+        
+                  if(select == 0) { return; }
+                  
                 }
                     break;
 
