@@ -26,10 +26,14 @@ public class UI {
 
     public static void printTrips(ResultSet trip){
         
-        System.out.printf("NR     %20s %20s %20s %20s %20s\n", "FROR", "TO", "DATE START", "DATE END", "COMPANY");
+        System.out.printf("NR        %20s %20s %20s %20s %20s\n", "FROR", "TO", "DATE START", "DATE END", "COMPANY");
         try{
+            if(trip == null){
+                System.out.println("Is Nuuulll");
+                return;
+            }
             while(trip.next()){
-                System.out.printf("%-7d %20s %20s %20s %20s %20s\n", trip.getInt(6), trip.getString(1), trip.getString(2), trip.getDate(3).toString(),
+                System.out.printf("%-10d %20s %20s %20s %20s %20s\n", trip.getInt(6), trip.getString(1), trip.getString(2), trip.getDate(3).toString(),
                                     trip.getDate(4).toString(), trip.getString(5));
             }
         }catch(SQLException slqe){}
