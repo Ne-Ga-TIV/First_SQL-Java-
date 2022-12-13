@@ -125,11 +125,20 @@ public class Main {
 
       try{
         con.setAutoCommit(false);
-        PreparedStatement statement = con.prepareStatement("INSERT INTO passenger VALUES (?, ?, ?)");
-        statement.setInt(1, generateUniqueId());
-        statement.setString(2, name);
-        statement.setString(3, surname);
-        statement.executeUpdate();
+        int passId = generateUniqueId();
+       
+        PreparedStatement statement1 = con.prepareStatement("INSERT INTO passenger VALUES (?, ?, ?)");
+        statement1.setInt(1, passId);
+        statement1.setString(2, name);
+        statement1.setString(3, surname);
+        statement1.executeUpdate();
+       
+        PreparedStatement statement2 = con.prepareStatement("INSERT INTO passenger_in_trip VALUES (?, ?, ?)");
+        statement2.setInt(1, trip);
+        statement2.setInt(2, passId);
+        statement2.setString(3, Integer.valueOf(place).toString());
+        statement2.executeUpdate();
+
         con.commit();
       }catch(SQLException sqle){
       }
