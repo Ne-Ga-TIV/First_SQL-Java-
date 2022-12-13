@@ -151,12 +151,17 @@ public class Main {
                                                     "date_start, date_end, company_name, trip.trip_id FROM trip, company, passenger_in_trip" +
                                                     "WHERE trip.company_id =  company.company_id AND"+  
                                                     "passenger_in_trip.trip_id = trip.trip_id AND passenger_in_trip.passenger_id = ?");
-        statement.setString(1, Integer.valueOf(id).toString());
+        statement.setInt(1, id);
+        
         ResultSet rsTrips = statement.executeQuery();
+        
         return rsTrips;
 
-      }catch(SQLException sqle){}
-      return null;
+      }catch(SQLException sqle){
+        System.out.println("Couldn't connect to database!");
+        sqle.printStackTrace();
+        return null ;
+      }
     }
 
     public static boolean checkRegs(int trip, int id, Connection con){
