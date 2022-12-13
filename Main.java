@@ -28,14 +28,10 @@ public class Main {
           Statement statement = con.createStatement();
 
           ResultSet rsTrips = statement.executeQuery("SELECT town_from, town_to," +
-                                "date_start, date_end, company_name FROM trip, company" +
+                                "date_start, date_end, company_name, trip_id FROM trip, company" +
                                 " WHERE trip.company_id =  company.company_id");
           
           ResultSet rsCount = statement.executeQuery("SELECT COUNT(*) FROM trip");
-          
-          if(rsCount == null){
-            return;
-          }
           rsCount.next();
           
           int count = rsCount.getInt(1);
@@ -43,18 +39,26 @@ public class Main {
             System.out.println("Sorry, there are currently no available trips");
             return;
           }
-          
-         
-          UI.printTrips(rsTrips);
 
-          System.out.println("Please select the trip number you want to check in for:1 - " + count);
+          UI.printTrips(rsTrips);
+          System.out.println("Please select the trip number you want to check(for exit enter 0)" + ":");
+
+          int select = UI.readAnswer(0, count);
+
+          if(select == 0) { return; }
+
+
 
         }catch(SQLException sqle){
-          System.out.println("Couldn't connect to database!");
+          System.out.println("Couldn't create statment");
           sqle.printStackTrace();
           return;
-
         }                  
+    }
+
+
+    public static void newPassenger(int trip){
+
     }
     public static Connection getConnection() {
         

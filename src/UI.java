@@ -29,7 +29,7 @@ public class UI {
         System.out.printf("NR     %20s %20s %20s %20s %20s\n", "FROR", "TO", "DATE START", "DATE END", "COMPANY");
         try{
             while(trip.next()){
-                System.out.printf("%-7d %20s %20s %20s %20s %20s\n", i, trip.getString(1), trip.getString(2), trip.getDate(3).toString(),
+                System.out.printf("%-7d %20s %20s %20s %20s %20s\n", trip.getInt(6), trip.getString(1), trip.getString(2), trip.getDate(3).toString(),
                                     trip.getDate(4).toString(), trip.getString(5));
                 i++;
             }
