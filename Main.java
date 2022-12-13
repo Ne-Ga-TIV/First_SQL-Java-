@@ -31,16 +31,23 @@ public class Main {
                                 "date_start, date_end, company_name FROM trip, company" +
                                 " WHERE trip.company_id =  company.company_id");
           
-          ResultSet rscount = statement.executeQuery("SELECT COUNT(*) FROM trip");
+          ResultSet rsCount = statement.executeQuery("SELECT COUNT(*) FROM trip");
           
-          if(rscount == null){
-            System.out.println("Sorry, there are currently no available trips");
+          if(rsCount == null){
             return;
           }
 
+          
+          int count = rsCount.getInt(1);
+          if(count == 0){
+            System.out.println("Sorry, there are currently no available trips");
+            return;
+          }
+          
+         
           UI.printTrips(rsTrips);
 
-          System.out.println("Please select the trip number you want to check in for:1 - " );
+          System.out.println("Please select the trip number you want to check in for:1 - " + count);
 
         }catch(SQLException sqle){
           System.out.println("Couldn't connect to database!");
