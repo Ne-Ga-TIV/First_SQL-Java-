@@ -4,6 +4,8 @@ import java.util.Scanner;
 import src.UI;
 import java.util.UUID;
 
+import javax.lang.model.util.ElementScanner6;
+
 
 
 public class Main {
@@ -143,7 +145,7 @@ public class Main {
 
     }
     
-    public static void getPassengerTrips(int id, Connection con){
+    public static ResultSet getPassengerTrips(int id, Connection con){
       try{
         PreparedStatement statement = con.prepareStatement("SELECT town_from, town_to," +
                                                     "date_start, date_end, company_name, trip_id FROM trip, company, passenger_in_trip" +
@@ -152,9 +154,26 @@ public class Main {
         statement.setInt(1, id);
 
         ResultSet rsTrips = statement.executeQuery();
-        UI.printTrips(rsTrips);
-
+        return rsTrips;
       }catch(SQLException sqle){}
+      return null;
+    }
+
+    public static boolean checkRegs(int trip, int id, Connection con){
+      try{
+        PreparedStatement statement = con.prepareStatement("SELECT COUNT(*) FROM passenger_in_trip WHERE trip_id = ? AND passenger_id = ?");
+        statement.setInt(1, trip);
+        statement.setInt(2, id);
+        ResultSet rs = statement.executeQuery();
+        rs.next();
+        if(rs.getInt(0) == 0){
+          return false;
+        }
+
+        System.out.println(rs.getInt(0));
+        return true;
+      }catch(SQLException sqle){}
+      return true;
 
     }
     public static void newPassenger(int trip, Connection con){
@@ -203,6 +222,28 @@ public class Main {
       }
      
     }
+    public static void cancelTrip(int id, Connection con){
+      
+      System.out.println("Please select the trip number you want to cancel(for exit enter 0)" + "");
+      int select = UI.readAnswer(0, Integer.MAX_VALUE);
+
+      if(select == 0) { return; }
+
+      if(!checkRegs(select, id, con)){
+        System.out.println("You don`t have registration for this trip");
+      }
+      try{
+        PreparedStatement statement = con.prepareStatement("DELETE FROM passenger_in_trip WHERE passenger_id = ? AND trip_id = ?");
+        statement.setInt(1, id);
+        statement.setInt(2, select);
+        statement.executeUpdate();
+      }catch(SQLException sqle){}
+
+
+
+
+    }
+
     public static Connection getConnection() {
         
         Connection postGresConn = null;
@@ -235,8 +276,40 @@ public class Main {
                 case 1:
                     registerForTrips(connection);
                     break;
-                case 2:
+                case 2:{
+                  
+                  System.out.println("Please, enter your id");
+                  
+                  int id = UI.readAnswer(1, Integer.MAX_VALUE);
+                  
+                  if(checkId(connection, id)){
+                    System.out.println("No passenger with this ID\n");
                     break;
+                  }  
+                  
+                  ResultSet rs = getPassengerTrips(id, connection);
+                  UI.printTrips(rs);
+
+                  System.out.printf("You want to cancel your trip?[y/n]");
+                  Scanner s = new Scanner(System.in);
+                  String an;
+          
+                  do{
+                    an = s.nextLine();
+                    if(an.equals("y") && an.equals("n")){
+                    System.out.println("Please enter y/n");
+              
+                    }
+                  }while(an.equals("y") && an.equals("n"));   
+          
+                   if(an.equals("y")){
+                    cancelTrip(id, connection);
+                    System.out.println("Your trip successfully cancel");
+
+                   }
+                   break;
+
+                }
                 case 3:{
 
                 }
