@@ -68,7 +68,6 @@ public class Main {
             s.nextLine();
 
           }
-          s.close();
         }catch(SQLException sqle){
           System.out.println("Couldn't create statment");
           sqle.printStackTrace();
