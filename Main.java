@@ -140,7 +140,9 @@ public class Main {
 
         System.out.println(rs.getInt(0));
         return true;
-      }catch(SQLException sqle){}
+      }catch(SQLException sqle){
+
+      }
       return true;
 
 
@@ -231,7 +233,7 @@ public class Main {
         System.out.println("Please enter the desired place");
         place = UI.readAnswer(1, 100);
         
-        if(checkPlace(trip, place, con)){
+        if(!checkPlace(trip, place, con)){
           place = 0;
           System.out.println("Sorry this place is already taken");
         }
