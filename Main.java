@@ -7,7 +7,8 @@ import src.Trip;
 
 
 public class Main {
-    
+  public static final String [] mainMenu = {"Register for trip", "Check out my trips",
+                                "Change my place", "Exit"};
   public static void loadDriver()
   {
      try {
@@ -21,11 +22,22 @@ public class Main {
   }
     public static void registerForTrips(Connection con){
         try{
+          con.setAutoCommit(false);
           Statement statement = con.createStatement();
-          ResultSet rs = statement.executeQuery("SELECT town_from, town_to," +
+          ResultSet rsTrips = statement.executeQuery("SELECT town_from, town_to," +
                                 "date_start, date_end, company_name FROM trip, company" +
                                 " WHERE trip.company_id =  company.company_id");
-          UI.printTrips(rs);
+          long count = statement.executeQuery("SECETC COUNT(*) FROM trip").getLong(1);
+          
+          con.commit();
+          if(count == 0){
+              System.out.println("Sorry, there are currently no available trips");
+              return;
+          }
+
+          UI.printTrips(rsTrips);
+
+          System.out.println("Please select the trip number you want to check in for:1 - " + count);
 
         }catch(SQLException sqle){
 
@@ -51,8 +63,7 @@ public class Main {
         loadDriver();
         Connection connection = getConnection();
         
-        final String [] mainMenu = {"Register for trip", "Check out my trips",
-                                "Change my place", "Exit"}; 
+        
         
         while(true){
             

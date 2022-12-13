@@ -34,6 +34,7 @@ public class UI {
                 i++;
             }
         }catch(SQLException slqe){}
+        
 
     }
     public static void printList(String navList[]){
