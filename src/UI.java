@@ -1,7 +1,7 @@
 package src;
 import java.util.Scanner;
 import java.sql.*;
-
+import java.lang.Runtime;
 public class UI {
    
     private static Scanner input = new Scanner(System.in);
@@ -26,7 +26,9 @@ public class UI {
 
     public static void printTrips(ResultSet trip){
         int i = 1;
-        System.console().writer().print("clear");        
+        try{
+            Runtime.getRuntime().exec("clear");
+        }catch(Exception e){}
         System.out.printf("NR     %20s %20s %20s %20s %20s\n", "FROR", "TO", "DATE START", "DATE END", "COMPANY");
         try{
             while(trip.next()){
