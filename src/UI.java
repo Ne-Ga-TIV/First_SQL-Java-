@@ -25,13 +25,11 @@ public class UI {
     }
 
     public static void printTrips(ResultSet trip){
-        int i = 1;
         System.out.printf("NR     %20s %20s %20s %20s %20s\n", "FROR", "TO", "DATE START", "DATE END", "COMPANY");
         try{
             while(trip.next()){
                 System.out.printf("%-7d %20s %20s %20s %20s %20s\n", trip.getInt(6), trip.getString(1), trip.getString(2), trip.getDate(3).toString(),
                                     trip.getDate(4).toString(), trip.getString(5));
-                i++;
             }
         }catch(SQLException slqe){}
         
@@ -42,6 +40,9 @@ public class UI {
         return in.matches("[A-Za-z]+");
     }
     
+    public static void printPassengerTrip(){
+        
+    }
     public static String readStr(){
         
         Scanner s = new Scanner(System.in);

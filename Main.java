@@ -1,3 +1,4 @@
+import java.net.ConnectException;
 import java.sql.*;
 import java.util.Scanner;
 import src.UI;
@@ -31,6 +32,21 @@ public class Main {
       return Integer.parseInt(str);
   }
 
+    public static boolean checkId(Connection con, int id){
+      try{
+        PreparedStatement statement = con.prepareStatement("SELECT COUNT(*) FROM passenger WHERE passenger_id = ?");
+        statement.setInt(1, id);
+
+        ResultSet rs = statement.executeQuery();
+        rs.next();
+        if(rs.getInt(0) == 0){
+          return false;
+        }
+        return true;
+      }catch(SQLException sqle){}
+      
+      return true;
+    }
 
     public static void registerForTrips(Connection con){
         try{
@@ -73,9 +89,34 @@ public class Main {
           if(an.equals("y"))
               newPassenger(select, con);
           else{
+          
             System.out.println("Please enter your id");
-            s.nextLine();
 
+            int id = UI.readAnswer(1, Integer.MAX_VALUE);
+            
+            if(checkId(con, id)){
+              System.out.println("No passenger with this ID");
+               return;
+            }
+            
+            int place = 0;
+           
+            do{
+              System.out.println("Please enter the desired place");
+              place = UI.readAnswer(1, 100);
+              
+              if(!checkPlace(select, place, con)){
+                place = 0;
+                System.out.println("Sorry this place is already taken");
+              }
+            }while(place == 0);
+
+            PreparedStatement statement2 = con.prepareStatement("INSERT INTO passenger_in_trip VALUES(?, ?, ?)");
+            statement2.setInt(1, select);
+            statement2.setInt(2, id);
+            statement2.setString(3, Integer.valueOf(place).toString());
+            statement2.executeUpdate();
+            System.out.println("You have successfully registered for the trip, your personal ID: " +  id + ", please don't forget this");
           }
         }catch(SQLException sqle){
           System.out.println("Couldn't create statment");
@@ -102,6 +143,21 @@ public class Main {
 
 
     }
+    
+    public static void getPassengerTrips(int id, Connection con){
+      try{
+        PreparedStatement statement = con.prepareStatement("SELECT town_from, town_to," +
+                                                    "date_start, date_end, company_name, trip_id FROM trip, company, passenger_in_trip" +
+                                                    "WHERE trip.company_id =  company.company_id AND"+  
+                                                    "passenger_in_trip.trip_id = trip.trip_id AND passenger_in_trip.passenger_id = ?");
+        statement.setInt(1, id);
+
+        ResultSet rsTrips = statement.executeQuery();
+        UI.printTrips(rsTrips);
+
+      }catch(SQLException sqle){}
+
+    }
     public static void newPassenger(int trip, Connection con){
       
       String name = null, surname = null;
@@ -117,6 +173,7 @@ public class Main {
       do{
         System.out.println("Please enter the desired place");
         place = UI.readAnswer(1, 100);
+        
         if(!checkPlace(trip, place, con)){
           place = 0;
           System.out.println("Sorry this place is already taken");
@@ -138,11 +195,13 @@ public class Main {
         statement2.setInt(2, passId);
         statement2.setString(3, Integer.valueOf(place).toString());
         statement2.executeUpdate();
-
         con.commit();
+        System.out.println("You have successfully registered for the trip, your personal ID: " +  passId + ", please don't forget this");
+        con.setAutoCommit(true);
+        return;  
+      
       }catch(SQLException sqle){
       }
-      
      
     }
     public static Connection getConnection() {
