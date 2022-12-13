@@ -42,6 +42,9 @@ public class Main {
           System.out.println("Please select the trip number you want to check in for:1 - " + count);
 
         }catch(SQLException sqle){
+          System.out.println("Couldn't connect to database!");
+          sqle.printStackTrace();
+          return;
 
         }                  
     }
