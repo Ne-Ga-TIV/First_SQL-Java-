@@ -83,11 +83,11 @@ public class Main {
           
           do{
             an = s.nextLine();
-            if(an.equals("y") && an.equals("n")){
+            if(!an.equals("y") || !an.equals("n")){
               System.out.println("Please enter y/n");
               
             }
-          }while(an.equals("y") && an.equals("n"));   
+          }while(!an.equals("y") || !an.equals("n"));   
           
           if(an.equals("y"))
               newPassenger(select, con);
@@ -105,6 +105,7 @@ public class Main {
            
             do{
               System.out.println("Please enter the desired place");
+              
               place = UI.readAnswer(1, 100);
               
               if(!checkPlace(select, place, con)){
