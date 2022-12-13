@@ -25,6 +25,7 @@ public class UI {
     }
 
     public static void printTrips(ResultSet trip){
+        
         System.out.printf("NR     %20s %20s %20s %20s %20s\n", "FROR", "TO", "DATE START", "DATE END", "COMPANY");
         try{
             while(trip.next()){
@@ -41,7 +42,7 @@ public class UI {
     }
     
     public static void printPassengerTrip(){
-        
+
     }
     public static String readStr(){
         
