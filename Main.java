@@ -45,7 +45,7 @@ public class Main {
         return false;
       }catch(SQLException sqle){}
       
-      return true;
+      return false;
     }
 
     public static void registerForTrips(Connection con){
@@ -98,7 +98,6 @@ public class Main {
               System.out.println("No passenger with this ID");
                return;
             }
-            
             int place = 0;
            
             do{
