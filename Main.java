@@ -36,7 +36,7 @@ public class Main {
           if(rsCount == null){
             return;
           }
-
+          rsCount.next();
           
           int count = rsCount.getInt(1);
           if(count == 0){
