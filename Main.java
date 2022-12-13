@@ -40,9 +40,9 @@ public class Main {
         ResultSet rs = statement.executeQuery();
         rs.next();
         if(rs.getInt(0) == 0){
-          return false;
+          return true;
         }
-        return true;
+        return false;
       }catch(SQLException sqle){}
       
       return true;
