@@ -56,7 +56,8 @@ public class Main {
           do{
             an = s.nextLine();
             if(an != "y" && an != "n"){
-              System.out.println("Please enter y/n");
+              System.out.println("Please enter y/n" + an);
+              
             }
           }while(an != "y" && an != "n");   
           if(an == "y")
